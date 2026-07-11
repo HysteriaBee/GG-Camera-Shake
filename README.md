@@ -19,6 +19,7 @@ Most of the info below is taken from gasgiant's repo, as well... this is literal
     * [Setup](#setup)
     * [Using Presets](#using-presets)
     * [Without Presets](#without-presets)
+	* [Handling Offset](#guns/handling-offset)
 2. [Presets](#presets)
 2. [PerlinShake](#perlinshake)
 2. [BounceShake](#bounceshake)
@@ -59,6 +60,42 @@ Otherwise, just require one of three modules: `PerlinShake, BounceShake, or Kick
 
 ```luau
 Shaker.Shake(PerlinShake.New(...fill in the parameters!...))
+```
+
+### Handling Offset
+
+For guns or scripts that require the cursor or camera's position you'll need to add the camera offset from the shaker. This is because otherwise scripts using the camera's position/rotation do not see the changes made by the shaker. Here is an example implementation for correcting a raycast using mouse location.
+
+```luau
+local UserInputService = game:GetService("UserInputService")
+local Shaker = require(path.to.GGCameraShaker)
+
+local raycastParams = RaycastParams.new()
+raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+raycastParams.IgnoreWater = true
+
+local function RayCast()
+	local mouse = UserInputService:GetMouseLocation()
+	local ray = game.Workspace.CurrentCamera:ViewportPointToRay(mouse.X, mouse.Y)
+	local offset = Shaker.GetOffset() -- Getting offset
+	local correctedRay = offset:VectorToWorldSpace(ray.Direction) * 1000 -- Main thing to focus on
+	
+	local result = workspace:Raycast(ray.Origin, correctedRay, raycastParams)
+
+	if result == nil then
+		return ray.Origin + correctedDir
+	else
+		return result.Position
+	end
+end
+```
+
+For correcting CFrame.
+
+```luau
+local Shaker = require(path.to.GGCameraShaker)
+local CameraCFrame = workspace.CurrentCamera.CFrame
+local CorrectedCFrame = CameraCFrame * Shaker.GetOffset()
 ```
 
 
