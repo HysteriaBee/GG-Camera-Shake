@@ -195,10 +195,10 @@ __GunFire3D__
 Suitable for gun recoil. Rotates camera in two axes: vertical, and horizontal. Uses `KickShake` algorithm.
 | Parameter        | Description | 
 | :------------- |:-------------|
-| verticalStrength: number     | Strength of rotation in X axis.|
-| horizontalStrength: number     | Strength of rotation in Y axis.|
-| attack: number     | Duration of the recoil attack.|
-| recover: number     | Duration for camera to return to normal.|
+| verticalStrength: number?     | Strength of rotation in X axis.|
+| horizontalStrength: number?     | Strength of rotation in Y axis.|
+| attack: number?     | Duration of the recoil attack.|
+| recover: number?     | Duration for camera to return to normal.|
 | forceEnabled: boolean?     | If enabled then it is unaffected by strengthMultiplier changes (enabled by default for fair play reasons).|
 
 ```luau
@@ -302,6 +302,8 @@ Creates an instance of KickShake in the direction from the source to the camera.
 | :------------- |:-------------|
 | sourcePosition: Vector3     | World position of the source of the shake. |
 | attenuateStrength: boolean     | Change strength depending on distance from the camera? |
+
+Leaving the overload nil will default to direction being equal to Displacement.New(Vector3.zero, Vector3.new(1,1,0))
 
 ### Params
 
