@@ -64,8 +64,7 @@ Simply create a preset in the CameraShakePresets module! You can choose from (#p
 Otherwise, just require one of three modules: `PerlinShake, BounceShake, or KickShake` and do as seen below (Details on these shake types are here: #perlinshake, #bounceshake, #kickshake):
 
 ```luau
-local PerlinShake = require(path.to.GGCameraShaker.PerlinShake) -- the shake algorithm of your choice
-Shaker.Shake(PerlinShake.New(...fill in the parameters!...))
+Shaker.Shake(Shaker.PerlinShake.New(...fill in the parameters! or not and leave it as default...))
 ```
 
 ### Handling Offset
