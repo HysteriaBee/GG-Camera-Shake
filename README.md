@@ -34,7 +34,7 @@ Most of the info below is taken from gasgiant's repo, as well... this is literal
 
 **Wally**
 ```
-GG-CameraShake = "hysteriabee/gg-camerashake@*"
+GG-CameraShake = "hysteriabee/gg-camerashake@version"
 ```
 
 **Get the latest release** ([.rbxm](https://github.com/HysteriaBee/GG-CameraShake/releases/latest)).
